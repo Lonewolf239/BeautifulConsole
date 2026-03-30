@@ -16,7 +16,7 @@ dotnet add package BeautifulConsole
 ```
 
 - **Пакет:** [nuget.org/packages/BeautifulConsole](https://www.nuget.org/packages/BeautifulConsole)
-- **Версия:** 0.1 | **.NET 6+**
+- **Версия:** 0.1.2 | **.NET 6+**
 - **Разработчик:** [Lonewolf239](https://github.com/Lonewolf239)
 
 ---
