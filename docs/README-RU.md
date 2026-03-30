@@ -140,7 +140,7 @@ BConsole.DefaultBackgroundColor = Color.DarkBlue;
 
 | Свойство | Описание | Платформа |
 |----------|----------|-----------|
-| `Width`, `Height` | Размер окна | Кроссплатформенно |
+| `Width`, `Height` | Размер окна | Windows |
 | `Title` | Заголовок окна | Кроссплатформенно |
 | `Resizable` | Разрешить изменение размера | Windows |
 | `Maximizable` | Разрешить разворачивание на весь экран | Windows |
@@ -153,7 +153,7 @@ BConsole.DefaultBackgroundColor = Color.DarkBlue;
 | `ProcessCtrlC` | Включить обработку Ctrl+C | Windows |
 | `EnableInputHistory` | Включить историю команд | Windows |
 | `CursorVisible` | Показывать/скрывать курсор | Кроссплатформенно |
-| `CursorSize` | Размер курсора (1–100) | Кроссплатформенно (могут быть ограничения) |
+| `CursorSize` | Размер курсора (1–100) | Windows |
 
 ### Clipboard Operations
 

@@ -131,7 +131,7 @@ The `BOptions` class provides extensive control over the console window (Windows
 
 | Property | Description | Platform |
 |----------|-------------|----------|
-| `Width`, `Height` | Window size | Cross‑platform |
+| `Width`, `Height` | Window size | Windows |
 | `Title` | Window title | Cross‑platform |
 | `Resizable` | Allow resizing | Windows |
 | `Maximizable` | Allow maximizing | Windows |
@@ -144,7 +144,7 @@ The `BOptions` class provides extensive control over the console window (Windows
 | `ProcessCtrlC` | Enable Ctrl+C handling | Windows |
 | `EnableInputHistory` | Enable command history | Windows |
 | `CursorVisible` | Show/hide cursor | Cross‑platform |
-| `CursorSize` | Cursor size (1–100) | Cross‑platform (may have limitations) |
+| `CursorSize` | Cursor size (1–100) | Windows |
 
 ### Clipboard Operations
 
