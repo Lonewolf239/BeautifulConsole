@@ -125,7 +125,7 @@ public static partial class Clipboard
                 stdin.Write(input);
                 stdin.Close();
             }
-            if (!process.WaitForExit(3000))
+            if (!process.WaitForExit(10000))
             {
                 process.Kill();
                 throw new InvalidOperationException($"Command '{command}' timed out.");
@@ -162,8 +162,8 @@ public static partial class Clipboard
         try
         {
             using var process = new Process();
-            process.StartInfo.FileName = "command";
-            process.StartInfo.Arguments = $"-v {command}";
+            process.StartInfo.FileName = "/bin/sh";
+            process.StartInfo.Arguments = $"-c \"command -v {command}\"";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
