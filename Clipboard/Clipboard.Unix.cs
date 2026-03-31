@@ -43,7 +43,6 @@ public static partial class Clipboard
 
     private static string? GetTextInternal()
     {
-        if (!IsTextAvailable()) return null;
         try
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))

@@ -133,7 +133,6 @@ public static partial class Clipboard
 
     private static string? GetTextInternal()
     {
-        if (!IsTextAvailable()) return null;
         if (!OpenClipboard(IntPtr.Zero)) return null;
         try
         {

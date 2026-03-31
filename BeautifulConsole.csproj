@@ -3,7 +3,7 @@
 		<TargetFrameworks>net6.0;net6.0-windows;net7.0;net7.0-windows;net8.0;net8.0-windows;net9.0;net9.0-windows;net10.0;net10.0-windows</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<PackageId>BeautifulConsole</PackageId>
-		<Version>0.1.2</Version>
+		<Version>0.2</Version>
 		<Authors>Lonewolf239</Authors>
 		<Description>A powerful .NET library for beautiful console applications with colored output, advanced input handling, clipboard support, and console window customization.</Description>
 		<PackageTags>console;terminal;color;ansi;clipboard;ui;cross-platform;beautiful</PackageTags>

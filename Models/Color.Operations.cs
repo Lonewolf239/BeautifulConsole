@@ -135,12 +135,12 @@ public partial class Color
         {
             if (R == 0) return 16;
             if (R == 255) return 231;
-            int gray = (int)Math.Round((R / 255.0) * 23);
+            int gray = (int)Math.Round((R / 255.0) * 23, MidpointRounding.AwayFromZero);
             return 232 + gray;
         }
-        int r = (int)Math.Round(R / 51.0);
-        int g = (int)Math.Round(G / 51.0);
-        int b = (int)Math.Round(B / 51.0);
+        int r = (int)Math.Round(R / 51.0, MidpointRounding.AwayFromZero);
+        int g = (int)Math.Round(G / 51.0, MidpointRounding.AwayFromZero);
+        int b = (int)Math.Round(B / 51.0, MidpointRounding.AwayFromZero);
         return 16 + (r * 36) + (g * 6) + b;
     }
 }

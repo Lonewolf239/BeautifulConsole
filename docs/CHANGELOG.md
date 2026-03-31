@@ -4,6 +4,32 @@
 ## Changelog · BeautifulConsole
 
 <details open>
+<summary><strong>0.2</strong> — March 31, 2026</summary>
+
+#### List of changes
+
+- **Terminal capability detection**
+  - Automatic detection of ANSI support, truecolor (24‑bit), 256‑color palette, mouse events, Kitty and iTerm2 protocols.
+  - ANSI sequences are automatically disabled when output is redirected.
+- **Color enhancements**
+  - New `Color` methods: blending, gradients, HSL/HSV conversion, conversion to xterm‑256 color index.
+  - Added `WriteGradient` method for smooth gradient output.
+  - Extended predefined colors.
+- **Performance optimizations**
+  - ANSI sequences are cached for repeated use.
+  - Thread‑safe output via `lock` synchronization.
+  - Reduced number of `Console.Write` calls in gradient output.
+- **Input improvements**
+  - All `Read`, `ReadLine` and `ReadKey` methods now accept an optional `newLine` parameter (default `false`) to control whether a blank line is printed before the prompt.
+- **Mouse foundation**
+  - `EnableMouse()` and `DisableMouse()` methods to activate mouse tracking (full event handling will be added in version 0.3).
+- **API additions**
+  - `Color.CreateClamped()` for safe color creation with automatic clamping.
+  - `WriteGradient()` for gradient text output.
+
+</details>
+
+<details>
 <summary><strong>0.1.2</strong> — March 30, 2026</summary>
 
 #### List of changes

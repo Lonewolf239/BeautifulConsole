@@ -5,32 +5,70 @@ namespace BeautifulConsole.Core;
 
 internal static partial class ConsoleCore
 {
-    public static int Read() => Console.Read();
-
-    public static int Read(Message? message, bool resetColor)
+    internal static int Read(bool newLine)
     {
-        if (message is not null) Write(message, resetColor);
-        return Console.Read();
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            return Console.Read();
+        }
     }
 
-    public static string? ReadLine(bool newLine)
+    internal static int Read(Message? message, bool newLine, bool resetColor)
     {
-        if (newLine) Console.WriteLine();
-        return Console.ReadLine();
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            if (message is not null) WriteCore(message, resetColor);
+            return Console.Read();
+        }
     }
 
-    public static string? ReadLine(Message? message, bool newLine, bool resetColor)
+    internal static int Read(string? message, bool newLine, bool resetColor) =>
+        Read(new Message(message), newLine, resetColor);
+
+    internal static string? ReadLine(bool newLine)
     {
-        if (newLine) Console.WriteLine();
-        if (message is not null) Write(message, resetColor);
-        return Console.ReadLine();
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            return Console.ReadLine();
+        }
     }
 
-    public static ConsoleKeyInfo ReadKey(bool intercept) => Console.ReadKey(intercept);
-
-    public static ConsoleKeyInfo ReadKey(bool intercept, Message? message, bool resetColor)
+    internal static string? ReadLine(Message? message, bool newLine, bool resetColor)
     {
-        if (message is not null) Write(message, resetColor);
-        return Console.ReadKey(intercept);
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            if (message is not null) WriteCore(message, resetColor);
+            return Console.ReadLine();
+        }
     }
+
+    internal static string? ReadLine(string? message, bool newLine, bool resetColor) =>
+        ReadLine(new Message(message), newLine, resetColor);
+
+    internal static ConsoleKeyInfo ReadKey(bool intercept, bool newLine)
+    {
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            return Console.ReadKey(intercept);
+        }
+    }
+
+    internal static ConsoleKeyInfo ReadKey(bool intercept, Message? message, bool newLine, bool resetColor)
+    {
+        lock (ConsoleLock)
+        {
+            if (newLine) Console.WriteLine();
+            if (message is not null) WriteCore(message, resetColor);
+            return Console.ReadKey(intercept);
+        }
+    }
+
+
+    internal static ConsoleKeyInfo ReadKey(bool intercept, string? message, bool newLine, bool resetColor) =>
+        ReadKey(intercept, new Message(message), newLine, resetColor);
 }

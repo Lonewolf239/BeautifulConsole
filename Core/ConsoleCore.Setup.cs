@@ -6,7 +6,7 @@ namespace BeautifulConsole.Core;
 
 internal static partial class ConsoleCore
 {
-    public static void SetupConsoleSettings(BOptions? options)
+    internal static void SetupConsoleSettings(BOptions? options)
     {
         if (options is null) throw new ArgumentNullException(nameof(options));
         if (!string.IsNullOrEmpty(options.Title)) Console.Title = options.Title;

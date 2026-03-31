@@ -7,7 +7,7 @@ dotnet add package BeautifulConsole
 ```
 
 - **Package:** [nuget.org/packages/BeautifulConsole](https://www.nuget.org/packages/BeautifulConsole)
-- **Version:** 0.1.2 | **.NET 6+**
+- **Version:** 0.2 | **.NET 6+**
 - **Developer:** [Lonewolf239](https://github.com/Lonewolf239)
 
 ---
@@ -17,9 +17,11 @@ dotnet add package BeautifulConsole
 | | Feature | Details |
 |---|---------|---------|
 | 🎨 | **True color (24‑bit) output** | ANSI escape sequences for full RGB colors. Falls back to nearest `ConsoleColor` in legacy terminals. |
-| ⌨️ | **Rich input with prompts** | `Read`, `ReadLine`, `ReadKey` with colored messages. |
+| 🌈 | **Gradient text** | Smooth color transitions using `WriteGradient`. |
+| ⌨️ | **Rich input with prompts** | `Read`, `ReadLine`, `ReadKey` with colored `Message` objects. |
 | 🖥️ | **Console window customization** | Set size, title, resizable, maximizable, center window, disable close button, hide title bar (Windows only). |
 | 📋 | **Cross‑platform clipboard** | Copy/paste text on Windows (WinAPI), macOS (`pbcopy`/`pbpaste`), and Linux (`wl-copy`/`xclip`/`xsel`). |
+| 🐭 | **Mouse support (experimental)** | Enable/disable mouse event reporting with `EnableMouse` / `DisableMouse`. |
 | 🔒 | **Single‑instance enforcement** | Mutex‑based detection to allow only one running instance of your app. |
 | ⚙️ | **Global color defaults** | Control default foreground/background colors and automatic reset after each write. |
 | 🗺️ | **Rich color palette** | Over 150 predefined colors (web, pastel, neon, metallic, etc.) plus custom RGB. |
@@ -41,16 +43,23 @@ dotnet add package BeautifulConsole
 
 ```csharp
 using BeautifulConsole;
+using BeautifulConsole.Models; // For Message class
 
-BConsole.WriteLine("Hello, BeautifulConsole!", Color.NeonGreen);
-BConsole.WriteLine("This is red on cyan", Color.Red, Color.Cyan);
+BConsole.WriteLine(new Message("Hello, BeautifulConsole!", Color.NeonGreen));
+BConsole.WriteLine(new Message("This is red on cyan", Color.Red, Color.Cyan));
 ```
 
 ### Read input with a prompt
 
 ```csharp
-string name = BConsole.ReadLine("What is your name? ");
+string name = BConsole.ReadLine(new Message("What is your name? ", Color.Yellow));
 BConsole.WriteLine($"Hello, {name}!", Color.Yellow);
+```
+
+### Gradient text
+
+```csharp
+BConsole.WriteGradient("This text flows from red to blue", Color.Red, Color.Blue);
 ```
 
 ### Configure the console window (Windows)
@@ -72,9 +81,9 @@ BConsole.SetupConsoleSettings(options);
 ### Copy text to clipboard
 
 ```csharp
-BConsole.Clipboard.SetText("Hello from BeautifulConsole!");
-string text = BConsole.Clipboard.GetText();
-if (BConsole.Clipboard.IsTextAvailable())
+BeautifulConsole.Clipboard.Clipboard.SetText("Hello from BeautifulConsole!");
+string text = BeautifulConsole.Clipboard.Clipboard.GetText();
+if (BeautifulConsole.Clipboard.Clipboard.IsTextAvailable())
     Console.WriteLine($"Clipboard contains: {text}");
 ```
 
@@ -96,17 +105,25 @@ if (!BConsole.SetMutex("MyApp_Unique_Name"))
 
 ### Colored Output
 
-All `Write` and `WriteLine` methods accept one or two colors:
+All `Write` and `WriteLine` methods accept a `Message` object that can contain text and optional foreground/background colors:
 
-- `Write(string? line)`, `Write(string? line, Color fg)`, `Write(string? line, Color fg, Color bg)`
-- `WriteLine()`, `WriteLine(string? line)`, `WriteLine(string? line, Color fg)`, `WriteLine(string? line, Color fg, Color bg)`
+- `Write(Message? message)`
+- `WriteLine()`
+- `WriteLine(Message? message)`
+
+**Example:**
+
+```csharp
+BConsole.WriteLine(new Message("This is green text", Color.Green));
+BConsole.WriteLine(new Message("White on blue", Color.White, Color.Blue));
+```
 
 The `AutoResetColor` property (default `true`) automatically returns to the default colors after each output. Set it to `false` if you want colors to persist:
 
 ```csharp
 BConsole.AutoResetColor = false;
-BConsole.Write("This stays ", Color.Red);
-BConsole.WriteLine("red", Color.Red);
+BConsole.Write(new Message("This stays ", Color.Red));
+BConsole.WriteLine(new Message("red", Color.Red));
 BConsole.ResetColor();   // manual reset
 ```
 
@@ -117,13 +134,38 @@ BConsole.DefaultForegroundColor = Color.LightGray;
 BConsole.DefaultBackgroundColor = Color.DarkBlue;
 ```
 
+### Gradient Text
+
+The `WriteGradient` method writes text with a smooth color transition:
+
+```csharp
+WriteGradient(string text, Color startColor, Color endColor, bool resetAfter = true);
+```
+
+**Example:**
+
+```csharp
+BConsole.WriteGradient("Rainbow effect", Color.Red, Color.Violet);
+```
+
 ### Input with Prompts
 
-All input methods have overloads that display a colored message before reading:
+All input methods have overloads that display a colored `Message` before reading:
 
-- `Read()`, `Read(string? message)`, `Read(string? message, Color fg)`, `Read(string? message, Color fg, Color bg)`
-- `ReadLine()`, `ReadLine(string? message)`, `ReadLine(string? message, Color fg)`, `ReadLine(string? message, Color fg, Color bg)`
-- `ReadKey(bool intercept)`, `ReadKey(bool intercept, string? message)`, `ReadKey(bool intercept, string? message, Color fg)`, `ReadKey(bool intercept, string? message, Color fg, Color bg)`
+- `Read(bool newLine)`
+- `Read(Message? message, bool newLine)`
+- `ReadLine(bool newLine)`
+- `ReadLine(Message? message, bool newLine)`
+- `ReadKey(bool intercept, bool newLine)`
+- `ReadKey(bool intercept, Message? message, bool newLine)`
+
+**Example:**
+
+```csharp
+var prompt = new Message("Enter your name: ", Color.Cyan);
+string name = BConsole.ReadLine(prompt);
+BConsole.WriteLine($"Hello, {name}!");
+```
 
 ### Console Window Configuration
 
@@ -146,9 +188,33 @@ The `BOptions` class provides extensive control over the console window (Windows
 | `CursorVisible` | Show/hide cursor | Cross‑platform |
 | `CursorSize` | Cursor size (1–100) | Windows |
 
+Additionally, many console properties are now directly accessible via `BConsole`:
+
+- `CursorVisible`
+- `WindowWidth`, `WindowHeight`
+- `BufferWidth`, `BufferHeight`
+- `Title`
+- `TreatControlCAsInput`
+- `CursorSize`
+- `NumberLock`, `CapsLock` (Windows only)
+- `LargestWindowWidth`, `LargestWindowHeight`
+- `IsInputRedirected`, `IsOutputRedirected`, `IsErrorRedirected`
+- `InputEncoding`, `OutputEncoding`
+
+### Mouse Support (Experimental)
+
+You can enable or disable mouse event reporting in terminals that support it:
+
+```csharp
+BConsole.EnableMouse();  // Start receiving mouse events
+BConsole.DisableMouse(); // Stop receiving mouse events
+```
+
+**Note:** Mouse event handling is not yet fully implemented – only the enabling/disabling of reporting is supported. Future versions will add event reading and processing.
+
 ### Clipboard Operations
 
-The `BConsole.Clipboard` static class provides a simple clipboard API:
+The `BeautifulConsole.Clipboard.Clipboard` static class provides a simple clipboard API:
 
 - `void SetText(string? text)`
 - `bool TrySetText(string? text)` – returns success status without throwing.
@@ -167,7 +233,7 @@ The `Color` class provides over 150 predefined colors. You can also create custo
 
 ```csharp
 Color custom = new Color(123, 45, 67);
-BConsole.WriteLine("Custom color", custom);
+BConsole.WriteLine(new Message("Custom color", custom));
 ```
 
 Predefined colors include:
@@ -189,25 +255,51 @@ A quick overview of the public API:
 ### `BConsole` (static class)
 
 **Output**
-- `Write(string? line)`, `Write(string? line, Color fg)`, `Write(string? line, Color fg, Color bg)`
-- `WriteLine()`, `WriteLine(string? line)`, `WriteLine(string? line, Color fg)`, `WriteLine(string? line, Color fg, Color bg)`
+- `Write(Message? message)`
+- `WriteLine()`
+- `WriteLine(Message? message)`
+- `WriteGradient(string text, Color startColor, Color endColor, bool resetAfter = true)`
 - `Clear()`
 - `ResetColor()`
 
 **Input**
-- `Read()`, `Read(string? message)`, `Read(string? message, Color fg)`, `Read(string? message, Color fg, Color bg)`
-- `ReadLine()`, `ReadLine(string? message)`, `ReadLine(string? message, Color fg)`, `ReadLine(string? message, Color fg, Color bg)`
-- `ReadKey(bool intercept)`, `ReadKey(bool intercept, string? message)`, `ReadKey(bool intercept, string? message, Color fg)`, `ReadKey(bool intercept, string? message, Color fg, Color bg)`
+- `Read(bool newLine = false)`
+- `Read(Message? message, bool newLine = false)`
+- `ReadLine(bool newLine = false)`
+- `ReadLine(Message? message, bool newLine = false)`
+- `ReadKey(bool intercept = false, bool newLine = false)`
+- `ReadKey(bool intercept, Message? message, bool newLine = false)`
 
 **Properties**
 - `bool AutoResetColor { get; set; }`
 - `Color DefaultForegroundColor { get; set; }`
 - `Color DefaultBackgroundColor { get; set; }`
+- `bool CursorVisible { get; set; }`
+- `int WindowWidth { get; set; }` (Windows only for setter)
+- `int WindowHeight { get; set; }` (Windows only for setter)
+- `int BufferWidth { get; set; }` (Windows only for setter)
+- `int BufferHeight { get; set; }` (Windows only for setter)
+- `string Title { get; set; }`
+- `bool TreatControlCAsInput { get; set; }`
+- `int CursorSize { get; set; }`
+- `bool NumberLock { get; }` (Windows only)
+- `bool CapsLock { get; }` (Windows only)
+- `int LargestWindowWidth { get; }`
+- `int LargestWindowHeight { get; }`
+- `bool IsInputRedirected { get; }`
+- `bool IsOutputRedirected { get; }`
+- `bool IsErrorRedirected { get; }`
+- `Encoding InputEncoding { get; set; }`
+- `Encoding OutputEncoding { get; set; }`
 
 **Setup & Single Instance**
 - `void SetupConsoleSettings(BOptions? options)`
 - `bool SetMutex(string? mutexName)`
 - `void ReleaseMutex()`
+
+**Mouse**
+- `void EnableMouse()`
+- `void DisableMouse()`
 
 ### `BOptions` (class)
 
@@ -215,11 +307,18 @@ All properties are nullable or have sensible defaults. See the [Console Window C
 
 ### `Color` (class)
 
-- Constructors: `Color(int r, int g, int b)`
+- Constructors: `Color(int r, int g, int b)`, `Color()` (empty color)
 - Over 150 static predefined colors.
 - Properties: `R`, `G`, `B` (bytes).
+- Methods: `Blend`, `Gradient`, `ToHsl`, `FromHsl`, `ToHsv`, `FromHsv`, `ToXterm256Index`.
 
-### `Clipboard` (static class, accessible via `BConsole.Clipboard`)
+### `Message` (class)
+
+- `Message(string? text, Color? foreground = null, Color? background = null)`
+- `Message(char text, Color? foreground = null, Color? background = null)`
+- Properties: `Text`, `ForegroundColor`, `BackgroundColor`.
+
+### `Clipboard` (static class, accessible via `BeautifulConsole.Clipboard.Clipboard`)
 
 - `void SetText(string? text)`
 - `bool TrySetText(string? text)`

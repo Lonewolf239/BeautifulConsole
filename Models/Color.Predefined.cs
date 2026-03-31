@@ -344,4 +344,316 @@ public partial class Color
     public static Color Wheat => new(245, 222, 179);
     /// <summary>Gets the white smoke color (245, 245, 245).</summary>
     public static Color WhiteSmoke => new(245, 245, 245);
+
+    /// <summary>Gets the chartreuse green color (127, 255, 0).</summary>
+    public static Color ChartreuseGreen => new(127, 255, 0);
+    /// <summary>Gets the electric lime color (204, 255, 0).</summary>
+    public static Color ElectricLime => new(204, 255, 0);
+
+    /// <summary>Gets the amber color (255, 191, 0).</summary>
+    public static Color Amber => new(255, 191, 0);
+    /// <summary>Gets the apricot color (251, 206, 177).</summary>
+    public static Color Apricot => new(251, 206, 177);
+    /// <summary>Gets the aqua marine color (125, 255, 212).</summary>
+    public static Color AquaMarine => new(125, 255, 212);
+    /// <summary>Gets the ash gray color (178, 190, 181).</summary>
+    public static Color AshGray => new(178, 190, 181);
+
+    /// <summary>Gets the baby blue color (137, 207, 240).</summary>
+    public static Color BabyBlue => new(137, 207, 240);
+    /// <summary>Gets the baby pink color (244, 194, 194).</summary>
+    public static Color BabyPink => new(244, 194, 194);
+    /// <summary>Gets the banana yellow color (255, 225, 53).</summary>
+    public static Color BananaYellow => new(255, 225, 53);
+    /// <summary>Gets the battleship gray color (132, 132, 130).</summary>
+    public static Color BattleshipGray => new(132, 132, 130);
+    /// <summary>Gets the beryl green color (222, 226, 106).</summary>
+    public static Color BerylGreen => new(222, 226, 106);
+    /// <summary>Gets the brick red color (203, 65, 84).</summary>
+    public static Color BrickRed => new(203, 65, 84);
+    /// <summary>Gets the bright green color (102, 255, 0).</summary>
+    public static Color BrightGreen => new(102, 255, 0);
+    /// <summary>Gets the bright pink color (255, 0, 127).</summary>
+    public static Color BrightPink => new(255, 0, 127);
+    /// <summary>Gets the bright turquoise color (8, 232, 222).</summary>
+    public static Color BrightTurquoise => new(8, 232, 222);
+    /// <summary>Gets the bubblegum pink color (252, 194, 209).</summary>
+    public static Color BubblegumPink => new(252, 194, 209);
+    /// <summary>Gets the burgundy color (128, 0, 32).</summary>
+    public static Color Burgundy => new(128, 0, 32);
+
+    /// <summary>Gets the cadmium green color (0, 107, 60).</summary>
+    public static Color CadmiumGreen => new(0, 107, 60);
+    /// <summary>Gets the cadmium orange color (237, 135, 45).</summary>
+    public static Color CadmiumOrange => new(237, 135, 45);
+    /// <summary>Gets the cadmium red color (227, 0, 34).</summary>
+    public static Color CadmiumRed => new(227, 0, 34);
+    /// <summary>Gets the cadmium yellow color (255, 246, 0).</summary>
+    public static Color CadmiumYellow => new(255, 246, 0);
+    /// <summary>Gets the carnation pink color (255, 166, 201).</summary>
+    public static Color CarnationPink => new(255, 166, 201);
+    /// <summary>Gets the cerise color (222, 49, 99).</summary>
+    public static Color Cerise => new(222, 49, 99);
+    /// <summary>Gets the cerulean color (0, 123, 167).</summary>
+    public static Color Cerulean => new(0, 123, 167);
+    /// <summary>Gets the champagne color (247, 231, 206).</summary>
+    public static Color Champagne => new(247, 231, 206);
+    /// <summary>Gets the charcoal color (54, 69, 79).</summary>
+    public static Color Charcoal => new(54, 69, 79);
+    /// <summary>Gets the cherry red color (222, 49, 99).</summary>
+    public static Color CherryRed => new(222, 49, 99);
+    /// <summary>Gets the chestnut color (149, 69, 53).</summary>
+    public static Color Chestnut => new(149, 69, 53);
+    /// <summary>Gets the cinnamon color (210, 105, 30).</summary>
+    public static Color Cinnamon => new(210, 105, 30);
+    /// <summary>Gets the cobalt blue color (0, 71, 171).</summary>
+    public static Color CobaltBlue => new(0, 71, 171);
+    /// <summary>Gets the coffee color (111, 78, 55).</summary>
+    public static Color Coffee => new(111, 78, 55);
+    /// <summary>Gets the cool gray color (140, 146, 172).</summary>
+    public static Color CoolGray => new(140, 146, 172);
+    /// <summary>Gets the coral pink color (248, 131, 121).</summary>
+    public static Color CoralPink => new(248, 131, 121);
+    /// <summary>Gets the corn color (251, 236, 93).</summary>
+    public static Color Corn => new(251, 236, 93);
+    /// <summary>Gets the cream color (255, 253, 208).</summary>
+    public static Color Cream => new(255, 253, 208);
+    /// <summary>Gets the crimson red color (153, 0, 0).</summary>
+    public static Color CrimsonRed => new(153, 0, 0);
+
+    /// <summary>Gets the denim blue color (21, 96, 189).</summary>
+    public static Color DenimBlue => new(21, 96, 189);
+    /// <summary>Gets the desert sand color (237, 201, 175).</summary>
+    public static Color DesertSand => new(237, 201, 175);
+
+    /// <summary>Gets the eggplant color (97, 64, 81).</summary>
+    public static Color Eggplant => new(97, 64, 81);
+    /// <summary>Gets the emerald green color (80, 200, 120).</summary>
+    public static Color EmeraldGreen => new(80, 200, 120);
+    /// <summary>Gets the eucalyptus color (68, 117, 76).</summary>
+    public static Color Eucalyptus => new(68, 117, 76);
+
+    /// <summary>Gets the falu red color (128, 24, 24).</summary>
+    public static Color FaluRed => new(128, 24, 24);
+    /// <summary>Gets the fern green color (79, 121, 66).</summary>
+    public static Color FernGreen => new(79, 121, 66);
+    /// <summary>Gets the flax color (238, 220, 130).</summary>
+    public static Color Flax => new(238, 220, 130);
+    /// <summary>Gets the fuchsia rose color (199, 67, 117).</summary>
+    public static Color FuchsiaRose => new(199, 67, 117);
+
+    /// <summary>Gets the ginger color (176, 101, 0).</summary>
+    public static Color Ginger => new(176, 101, 0);
+    /// <summary>Gets the glacier blue color (112, 179, 199).</summary>
+    public static Color GlacierBlue => new(112, 179, 199);
+    /// <summary>Gets the golden poppy color (252, 194, 0).</summary>
+    public static Color GoldenPoppy => new(252, 194, 0);
+    /// <summary>Gets the grape color (111, 45, 168).</summary>
+    public static Color Grape => new(111, 45, 168);
+    /// <summary>Gets the gunmetal gray color (42, 52, 57).</summary>
+    public static Color GunmetalGray => new(42, 52, 57);
+
+    /// <summary>Gets the harvest gold color (218, 145, 0).</summary>
+    public static Color HarvestGold => new(218, 145, 0);
+    /// <summary>Gets the honey color (237, 201, 46).</summary>
+    public static Color Honey => new(237, 201, 46);
+    /// <summary>Gets the hunter green color (53, 94, 59).</summary>
+    public static Color HunterGreen => new(53, 94, 59);
+
+    /// <summary>Gets the ice blue color (153, 204, 255).</summary>
+    public static Color IceBlue => new(153, 204, 255);
+    /// <summary>Gets the indian yellow color (227, 168, 87).</summary>
+    public static Color IndianYellow => new(227, 168, 87);
+    /// <summary>Gets the international orange color (255, 79, 0).</summary>
+    public static Color InternationalOrange => new(255, 79, 0);
+    /// <summary>Gets the iris color (90, 79, 207).</summary>
+    public static Color Iris => new(90, 79, 207);
+    /// <summary>Gets the iron gray color (97, 97, 97).</summary>
+    public static Color IronGray => new(97, 97, 97);
+    /// <summary>Gets the ivory black color (41, 36, 33).</summary>
+    public static Color IvoryBlack => new(41, 36, 33);
+
+    /// <summary>Gets the jade green color (0, 168, 107).</summary>
+    public static Color JadeGreen => new(0, 168, 107);
+    /// <summary>Gets the jasmine color (248, 222, 126).</summary>
+    public static Color Jasmine => new(248, 222, 126);
+    /// <summary>Gets the jet black color (52, 52, 52).</summary>
+    public static Color JetBlack => new(52, 52, 52);
+
+    /// <summary>Gets the kelly green color (76, 187, 23).</summary>
+    public static Color KellyGreen => new(76, 187, 23);
+    /// <summary>Gets the khaki green color (114, 126, 73).</summary>
+    public static Color KhakiGreen => new(114, 126, 73);
+
+    /// <summary>Gets the lapis lazuli color (38, 97, 156).</summary>
+    public static Color LapisLazuli => new(38, 97, 156);
+    /// <summary>Gets the lavender gray color (196, 195, 208).</summary>
+    public static Color LavenderGray => new(196, 195, 208);
+    /// <summary>Gets the lemon color (255, 247, 0).</summary>
+    public static Color Lemon => new(255, 247, 0);
+    /// <summary>Gets the lilac color (200, 162, 200).</summary>
+    public static Color Lilac => new(200, 162, 200);
+    /// <summary>Gets the limeade color (191, 255, 0).</summary>
+    public static Color Limeade => new(191, 255, 0);
+    /// <summary>Gets the linen white color (240, 230, 210).</summary>
+    public static Color LinenWhite => new(240, 230, 210);
+
+    /// <summary>Gets the mahogany color (192, 64, 0).</summary>
+    public static Color Mahogany => new(192, 64, 0);
+    /// <summary>Gets the maize color (251, 236, 93).</summary>
+    public static Color Maize => new(251, 236, 93);
+    /// <summary>Gets the mandarin color (243, 122, 72).</summary>
+    public static Color Mandarin => new(243, 122, 72);
+    /// <summary>Gets the mango color (253, 191, 46).</summary>
+    public static Color Mango => new(253, 191, 46);
+    /// <summary>Gets the mauve color (224, 176, 255).</summary>
+    public static Color Mauve => new(224, 176, 255);
+    /// <summary>Gets the meadow green color (105, 165, 98).</summary>
+    public static Color MeadowGreen => new(105, 165, 98);
+    /// <summary>Gets the melon color (253, 188, 180).</summary>
+    public static Color Melon => new(253, 188, 180);
+    /// <summary>Gets the metallic bronze color (166, 100, 43).</summary>
+    public static Color MetallicBronze => new(166, 100, 43);
+    /// <summary>Gets the midnight color (112, 66, 65).</summary>
+    public static Color Midnight => new(112, 66, 65);
+    /// <summary>Gets the mint green color (152, 255, 152).</summary>
+    public static Color MintGreen => new(152, 255, 152);
+    /// <summary>Gets the mist blue color (128, 157, 179).</summary>
+    public static Color MistBlue => new(128, 157, 179);
+    /// <summary>Gets the mocha color (117, 81, 52).</summary>
+    public static Color Mocha => new(117, 81, 52);
+    /// <summary>Gets the moss green color (138, 154, 91).</summary>
+    public static Color MossGreen => new(138, 154, 91);
+    /// <summary>Gets the mustard color (255, 219, 88).</summary>
+    public static Color Mustard => new(255, 219, 88);
+    /// <summary>Gets the myrtle green color (49, 120, 115).</summary>
+    public static Color MyrtleGreen => new(49, 120, 115);
+
+    /// <summary>Gets the neon teal color (0, 255, 255).</summary>
+    public static Color NeonTeal => new(0, 255, 255);
+    /// <summary>Gets the nutmeg color (136, 86, 67).</summary>
+    public static Color Nutmeg => new(136, 86, 67);
+
+    /// <summary>Gets the ocean blue color (79, 113, 154).</summary>
+    public static Color OceanBlue => new(79, 113, 154);
+    /// <summary>Gets the ochre color (204, 119, 34).</summary>
+    public static Color Ochre => new(204, 119, 34);
+    /// <summary>Gets the olive green color (85, 107, 47).</summary>
+    public static Color OliveGreen => new(85, 107, 47);
+    /// <summary>Gets the onyx color (53, 56, 57).</summary>
+    public static Color Onyx => new(53, 56, 57);
+    /// <summary>Gets the opal color (168, 196, 189).</summary>
+    public static Color Opal => new(168, 196, 189);
+
+    /// <summary>Gets the paprika color (141, 44, 23).</summary>
+    public static Color Paprika => new(141, 44, 23);
+    /// <summary>Gets the peach color (255, 229, 180).</summary>
+    public static Color Peach => new(255, 229, 180);
+    /// <summary>Gets the pearl white color (234, 224, 200).</summary>
+    public static Color PearlWhite => new(234, 224, 200);
+    /// <summary>Gets the periwinkle color (204, 204, 255).</summary>
+    public static Color Periwinkle => new(204, 204, 255);
+    /// <summary>Gets the persimmon color (236, 88, 0).</summary>
+    public static Color Persimmon => new(236, 88, 0);
+    /// <summary>Gets the pewter color (145, 147, 139).</summary>
+    public static Color Pewter => new(145, 147, 139);
+    /// <summary>Gets the pine green color (1, 121, 111).</summary>
+    public static Color PineGreen => new(1, 121, 111);
+    /// <summary>Gets the pistachio color (147, 197, 114).</summary>
+    public static Color Pistachio => new(147, 197, 114);
+    /// <summary>Gets the platinum color (229, 228, 226).</summary>
+    public static Color Platinum => new(229, 228, 226);
+    /// <summary>Gets the pomegranate color (242, 65, 34).</summary>
+    public static Color Pomegranate => new(242, 65, 34);
+    /// <summary>Gets the pumpkin color (255, 117, 24).</summary>
+    public static Color Pumpkin => new(255, 117, 24);
+
+    /// <summary>Gets the quartz color (81, 72, 79).</summary>
+    public static Color Quartz => new(81, 72, 79);
+
+    /// <summary>Gets the racing green color (0, 76, 49).</summary>
+    public static Color RacingGreen => new(0, 76, 49);
+    /// <summary>Gets the raspberry color (227, 11, 93).</summary>
+    public static Color Raspberry => new(227, 11, 93);
+    /// <summary>Gets the razzmatazz color (227, 37, 107).</summary>
+    public static Color Razzmatazz => new(227, 37, 107);
+    /// <summary>Gets the rose gold color (183, 110, 121).</summary>
+    public static Color RoseGold => new(183, 110, 121);
+    /// <summary>Gets the rosewood color (101, 0, 11).</summary>
+    public static Color Rosewood => new(101, 0, 11);
+    /// <summary>Gets the rust color (183, 65, 14).</summary>
+    public static Color Rust => new(183, 65, 14);
+
+    /// <summary>Gets the sage green color (138, 154, 91).</summary>
+    public static Color SageGreen => new(138, 154, 91);
+    /// <summary>Gets the sapphire color (15, 82, 186).</summary>
+    public static Color Sapphire => new(15, 82, 186);
+    /// <summary>Gets the scarlet color (255, 36, 0).</summary>
+    public static Color Scarlet => new(255, 36, 0);
+    /// <summary>Gets the sepia color (112, 66, 20).</summary>
+    public static Color Sepia => new(112, 66, 20);
+    /// <summary>Gets the shamrock green color (0, 158, 96).</summary>
+    public static Color ShamrockGreen => new(0, 158, 96);
+    /// <summary>Gets the slate gray color (112, 128, 144).</summary>
+    public static Color SlateGray => new(112, 128, 144);
+    /// <summary>Gets the smoky black color (16, 12, 8).</summary>
+    public static Color SmokyBlack => new(16, 12, 8);
+    /// <summary>Gets the spring bud color (167, 252, 0).</summary>
+    public static Color SpringBud => new(167, 252, 0);
+    /// <summary>Gets the strawberry color (252, 90, 141).</summary>
+    public static Color Strawberry => new(252, 90, 141);
+    /// <summary>Gets the sunglow color (255, 204, 51).</summary>
+    public static Color Sunglow => new(255, 204, 51);
+    /// <summary>Gets the sunset orange color (253, 94, 83).</summary>
+    public static Color SunsetOrange => new(253, 94, 83);
+    /// <summary>Gets the tangerine color (242, 133, 0).</summary>
+    public static Color Tangerine => new(242, 133, 0);
+    /// <summary>Gets the taupe color (72, 60, 50).</summary>
+    public static Color Taupe => new(72, 60, 50);
+    /// <summary>Gets the tea green color (208, 240, 192).</summary>
+    public static Color TeaGreen => new(208, 240, 192);
+    /// <summary>Gets the teal color (0, 128, 128).</summary>
+    public static Color Teal => new(0, 128, 128);
+    /// <summary>Gets the terra cotta color (226, 114, 91).</summary>
+    public static Color TerraCotta => new(226, 114, 91);
+    /// <summary>Gets the titanium white color (255, 255, 255).</summary>
+    public static Color TitaniumWhite => new(255, 255, 255);
+    /// <summary>Gets the topaz color (255, 200, 124).</summary>
+    public static Color Topaz => new(255, 200, 124);
+    /// <summary>Gets the tuscan red color (124, 72, 62).</summary>
+    public static Color TuscanRed => new(124, 72, 62);
+    /// <summary>Gets the tyrian purple color (102, 2, 60).</summary>
+    public static Color TyrianPurple => new(102, 2, 60);
+
+    /// <summary>Gets the umber color (99, 81, 71).</summary>
+    public static Color Umber => new(99, 81, 71);
+    /// <summary>Gets the uranium blue color (0, 115, 207).</summary>
+    public static Color UraniumBlue => new(0, 115, 207);
+
+    /// <summary>Gets the vanilla color (243, 229, 171).</summary>
+    public static Color Vanilla => new(243, 229, 171);
+    /// <summary>Gets the vermilion color (227, 66, 52).</summary>
+    public static Color Vermilion => new(227, 66, 52);
+    /// <summary>Gets the viridian color (64, 130, 109).</summary>
+    public static Color Viridian => new(64, 130, 109);
+
+    /// <summary>Gets the warm gray color (128, 128, 105).</summary>
+    public static Color WarmGray => new(128, 128, 105);
+    /// <summary>Gets the watermelon color (245, 99, 119).</summary>
+    public static Color Watermelon => new(245, 99, 119);
+    /// <summary>Gets the wenge color (100, 84, 82).</summary>
+    public static Color Wenge => new(100, 84, 82);
+    /// <summary>Gets the wine red color (114, 47, 55).</summary>
+    public static Color WineRed => new(114, 47, 55);
+
+    /// <summary>Gets the xanadu color (115, 134, 120).</summary>
+    public static Color Xanadu => new(115, 134, 120);
+
+    /// <summary>Gets the yale blue color (15, 77, 146).</summary>
+    public static Color YaleBlue => new(15, 77, 146);
+
+    /// <summary>Gets the zaffre color (0, 20, 168).</summary>
+    public static Color Zaffre => new(0, 20, 168);
+    /// <summary>Gets the zinnwaldite brown color (44, 22, 8).</summary>
+    public static Color ZinnwalditeBrown => new(44, 22, 8);
 }

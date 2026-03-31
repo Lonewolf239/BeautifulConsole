@@ -3,8 +3,8 @@
 [![.NET 6+](https://img.shields.io/badge/.NET-6+-2D2D2D?style=for-the-badge&logo=dotnet&logoColor=FFFFFF)](https://dotnet.microsoft.com/)
 [![MIT License](https://img.shields.io/badge/License-MIT-2D2D2D?style=for-the-badge&logo=opensourceinitiative&logoColor=FFFFFF)](https://github.com/Lonewolf239/BeautifulConsole/blob/main/LICENSE)
 
-[![Roadmap](https://img.shields.io/badge/ROADMAP-2D2D2D?style=for-the-badge&logo=map&logoColor=FFFFFF)](./ROADMAP-RU.md)
-[![Changelog](https://img.shields.io/badge/CHANGELOG-2D2D2D?style=for-the-badge&logo=history&logoColor=FFFFFF)](./CHANGELOG-RU.md)
+[![Roadmap](https://img.shields.io/badge/ROADMAP-2D2D2D?style=for-the-badge&logo=map&logoColor=FFFFFF)](./ROADMAP.md)
+[![Changelog](https://img.shields.io/badge/CHANGELOG-2D2D2D?style=for-the-badge&logo=history&logoColor=FFFFFF)](./CHANGELOG.md)
 
 ### Languages
 [![EN](https://img.shields.io/badge/README-EN-2D2D2D?style=for-the-badge&logo=github&logoColor=FFFFFF)](./README.md)
@@ -12,30 +12,32 @@
 
 # BeautifulConsole
 
-Мощная .NET-библиотека для создания красивых консольных приложений с **поддержкой настоящего цвета (true‑color)**, **кроссплатформенным буфером обмена**, **расширенной настройкой окна** и чистым API в стиле «чёрного ящика».
+Мощная .NET-библиотека для создания красивых консольных приложений с **поддержкой true‑цветов (24 бит)**, **кросс‑платформенным буфером обмена**, **расширенной настройкой окна** и чистым API, спроектированным по принципу «чёрного ящика».
 
 ```bash
 dotnet add package BeautifulConsole
 ```
 
 - **Пакет:** [nuget.org/packages/BeautifulConsole](https://www.nuget.org/packages/BeautifulConsole)
-- **Версия:** 0.1.2 | **.NET 6+**
+- **Версия:** 0.2 | **.NET 6+**
 - **Разработчик:** [Lonewolf239](https://github.com/Lonewolf239)
 
 ---
 
 ## Features
 
-| | Функция | Описание |
-|---|---------|----------|
-| 🎨 | **Вывод в true color (24‑бит)** | ANSI-escape последовательности для полноценных RGB-цветов. При работе в устаревших терминалах автоматически подбирает ближайший цвет из `ConsoleColor`. |
-| ⌨️ | **Богатый ввод с подсказками** | `Read`, `ReadLine`, `ReadKey` с цветными сообщениями. |
-| 🖥️ | **Настройка окна консоли** | Установка размера, заголовка, возможность изменять размер, разворачивать на весь экран, центрировать окно, отключать кнопку закрытия, скрывать заголовок (только Windows). |
-| 📋 | **Кроссплатформенный буфер обмена** | Копирование/вставка текста в Windows (WinAPI), macOS (`pbcopy`/`pbpaste`) и Linux (`wl-copy`/`xclip`/`xsel`). |
-| 🔒 | **Контроль единственного экземпляра** | Обнаружение запущенных экземпляров через мьютекс — разрешён только один экземпляр приложения. |
-| ⚙️ | **Глобальные цвета по умолчанию** | Управление цветом текста и фона по умолчанию, автоматический сброс после каждого вывода. |
-| 🗺️ | **Богатая цветовая палитра** | Более 150 предопределённых цветов (web, пастельные, неоновые, металлические и др.), а также создание собственных RGB-цветов. |
-| 📦 | **Дизайн «чёрный ящик»** | Всё взаимодействие происходит через статический класс `BConsole` — внутренняя сложность полностью скрыта. |
+| | Возможность | Подробности |
+|---|------------|-------------|
+| 🎨 | **True color (24‑bit) вывод** | ANSI-escape-последовательности для полноцветного RGB. В терминалах без поддержки ANSI используется ближайший цвет из `ConsoleColor`. |
+| 🌈 | **Градиентный текст** | Плавные цветовые переходы с помощью `WriteGradient`. |
+| ⌨️ | **Богатый ввод с подсказками** | `Read`, `ReadLine`, `ReadKey` с цветными `Message`. |
+| 🖥️ | **Настройка окна консоли** | Изменение размера, заголовка, возможность изменения размеров, максимизации, центрирование, отключение кнопки закрытия, скрытие заголовка (только Windows). |
+| 📋 | **Кросс‑платформенный буфер обмена** | Копирование/вставка текста на Windows (WinAPI), macOS (`pbcopy`/`pbpaste`) и Linux (`wl-copy`/`xclip`/`xsel`). |
+| 🐭 | **Поддержка мыши (экспериментально)** | Включение/отключение отслеживания событий мыши с помощью `EnableMouse` / `DisableMouse`. |
+| 🔒 | **Ограничение единственного экземпляра** | Обнаружение уже запущенного экземпляра приложения через мьютекс. |
+| ⚙️ | **Глобальные цвета по умолчанию** | Управление цветами переднего плана и фона по умолчанию, а также автоматический сброс после каждой записи. |
+| 🗺️ | **Богатая цветовая палитра** | Более 150 предопределённых цветов (web, пастельные, неоновые, металлические и др.) плюс произвольные RGB. |
+| 📦 | **Чёрный ящик** | Всё взаимодействие происходит через статический класс `BConsole` – внутренняя сложность скрыта. |
 
 ---
 
@@ -49,23 +51,30 @@ dotnet add package BeautifulConsole
 
 ## Quick Start
 
-### Hello, World! with color
+### Hello, World! с цветом
 
 ```csharp
 using BeautifulConsole;
+using BeautifulConsole.Models; // Для класса Message
 
-BConsole.WriteLine("Привет, BeautifulConsole!", Color.NeonGreen);
-BConsole.WriteLine("Это красный текст на синем фоне", Color.Red, Color.Cyan);
+BConsole.WriteLine(new Message("Привет, BeautifulConsole!", Color.NeonGreen));
+BConsole.WriteLine(new Message("Красный на голубом", Color.Red, Color.Cyan));
 ```
 
-### Read input with a prompt
+### Ввод с подсказкой
 
 ```csharp
-string name = BConsole.ReadLine("Как вас зовут? ");
+string name = BConsole.ReadLine(new Message("Как вас зовут? ", Color.Yellow));
 BConsole.WriteLine($"Привет, {name}!", Color.Yellow);
 ```
 
-### Configure the console window (Windows)
+### Градиентный текст
+
+```csharp
+BConsole.WriteGradient("Этот текст плавно меняет цвет от красного к синему", Color.Red, Color.Blue);
+```
+
+### Настройка окна консоли (Windows)
 
 ```csharp
 var options = new BOptions
@@ -81,44 +90,52 @@ var options = new BOptions
 BConsole.SetupConsoleSettings(options);
 ```
 
-### Copy text to clipboard
+### Копирование в буфер обмена
 
 ```csharp
-BConsole.Clipboard.SetText("Привет из BeautifulConsole!");
-string text = BConsole.Clipboard.GetText();
-if (BConsole.Clipboard.IsTextAvailable())
+BeautifulConsole.Clipboard.Clipboard.SetText("Привет из BeautifulConsole!");
+string text = BeautifulConsole.Clipboard.Clipboard.GetText();
+if (BeautifulConsole.Clipboard.Clipboard.IsTextAvailable())
     Console.WriteLine($"Буфер обмена содержит: {text}");
 ```
 
-### Ensure single instance
+### Ограничение единственного экземпляра
 
 ```csharp
 if (!BConsole.SetMutex("MyApp_Unique_Name"))
 {
-    Console.WriteLine("Другой экземпляр уже запущен.");
+    Console.WriteLine("Другая копия приложения уже запущена.");
     return;
 }
-// Логика приложения...
-// По окончании работы вызовите BConsole.ReleaseMutex() или положитесь на финализатор.
+// Логика вашего приложения...
+// По завершении вызовите BConsole.ReleaseMutex() или положитесь на финализатор.
 ```
 
 ---
 
 ## Detailed Usage
 
-### Colored Output
+### Цветной вывод
 
-Все методы `Write` и `WriteLine` принимают один или два цвета:
+Все методы `Write` и `WriteLine` принимают объект `Message`, который содержит текст и опциональные цвета переднего плана и фона:
 
-- `Write(string? line)`, `Write(string? line, Color fg)`, `Write(string? line, Color fg, Color bg)`
-- `WriteLine()`, `WriteLine(string? line)`, `WriteLine(string? line, Color fg)`, `WriteLine(string? line, Color fg, Color bg)`
+- `Write(Message? message)`
+- `WriteLine()`
+- `WriteLine(Message? message)`
 
-Свойство `AutoResetColor` (по умолчанию `true`) автоматически возвращает цвета по умолчанию после каждого вывода. Если установить его в `false`, цвета будут сохраняться:
+**Пример:**
+
+```csharp
+BConsole.WriteLine(new Message("Это зелёный текст", Color.Green));
+BConsole.WriteLine(new Message("Белый на синем", Color.White, Color.Blue));
+```
+
+Свойство `AutoResetColor` (по умолчанию `true`) автоматически сбрасывает цвета к значениям по умолчанию после каждого вывода. Если установить его в `false`, цвета будут сохраняться:
 
 ```csharp
 BConsole.AutoResetColor = false;
-BConsole.Write("Этот текст остаётся ", Color.Red);
-BConsole.WriteLine("красным", Color.Red);
+BConsole.Write(new Message("Этот текст остаётся ", Color.Red));
+BConsole.WriteLine(new Message("красным", Color.Red));
 BConsole.ResetColor();   // ручной сброс
 ```
 
@@ -129,62 +146,111 @@ BConsole.DefaultForegroundColor = Color.LightGray;
 BConsole.DefaultBackgroundColor = Color.DarkBlue;
 ```
 
-### Input with Prompts
+### Градиентный текст
 
-Все методы ввода имеют перегрузки, которые выводят цветное сообщение перед чтением:
+Метод `WriteGradient` выводит текст с плавным переходом цвета:
 
-- `Read()`, `Read(string? message)`, `Read(string? message, Color fg)`, `Read(string? message, Color fg, Color bg)`
-- `ReadLine()`, `ReadLine(string? message)`, `ReadLine(string? message, Color fg)`, `ReadLine(string? message, Color fg, Color bg)`
-- `ReadKey(bool intercept)`, `ReadKey(bool intercept, string? message)`, `ReadKey(bool intercept, string? message, Color fg)`, `ReadKey(bool intercept, string? message, Color fg, Color bg)`
+```csharp
+WriteGradient(string text, Color startColor, Color endColor, bool resetAfter = true);
+```
 
-### Console Window Configuration
+**Пример:**
 
-Класс `BOptions` предоставляет широкий контроль над окном консоли (большинство функций работают только в Windows; размер и заголовок — кроссплатформенно).
+```csharp
+BConsole.WriteGradient("Радужный эффект", Color.Red, Color.Violet);
+```
+
+### Ввод с подсказкой
+
+Все методы ввода имеют перегрузки, которые перед чтением отображают цветное сообщение `Message`:
+
+- `Read(bool newLine)`
+- `Read(Message? message, bool newLine)`
+- `ReadLine(bool newLine)`
+- `ReadLine(Message? message, bool newLine)`
+- `ReadKey(bool intercept, bool newLine)`
+- `ReadKey(bool intercept, Message? message, bool newLine)`
+
+**Пример:**
+
+```csharp
+var prompt = new Message("Введите ваше имя: ", Color.Cyan);
+string name = BConsole.ReadLine(prompt);
+BConsole.WriteLine($"Привет, {name}!");
+```
+
+### Настройка окна консоли
+
+Класс `BOptions` предоставляет широкие возможности управления окном консоли (большинство свойств работают только в Windows, некоторые – кросс-платформенно).
 
 | Свойство | Описание | Платформа |
 |----------|----------|-----------|
 | `Width`, `Height` | Размер окна | Windows |
-| `Title` | Заголовок окна | Кроссплатформенно |
+| `Title` | Заголовок окна | Кросс‑платформенно |
 | `Resizable` | Разрешить изменение размера | Windows |
-| `Maximizable` | Разрешить разворачивание на весь экран | Windows |
-| `Minimizable` | Разрешить сворачивание | Windows |
-| `CenterWindow` | Центрировать окно на экране | Windows |
-| `HideTitleBar` | Скрыть заголовок окна | Windows |
+| `Maximizable` | Разрешить максимизацию | Windows |
+| `Minimizable` | Разрешить минимизацию | Windows |
+| `CenterWindow` | Центрировать на экране | Windows |
+| `HideTitleBar` | Скрыть заголовок | Windows |
 | `DisableCloseButton` | Отключить кнопку закрытия | Windows |
-| `DisableQuickEdit` | Отключить режим быстрого редактирования | Windows |
-| `EchoInput` | Отображать вводимые символы | Windows |
-| `ProcessCtrlC` | Включить обработку Ctrl+C | Windows |
-| `EnableInputHistory` | Включить историю команд | Windows |
-| `CursorVisible` | Показывать/скрывать курсор | Кроссплатформенно |
+| `DisableQuickEdit` | Отключить быстрый режим редактирования | Windows |
+| `EchoInput` | Показывать вводимые символы | Windows |
+| `ProcessCtrlC` | Обрабатывать Ctrl+C | Windows |
+| `EnableInputHistory` | Включить историю ввода | Windows |
+| `CursorVisible` | Показать/скрыть курсор | Кросс‑платформенно |
 | `CursorSize` | Размер курсора (1–100) | Windows |
 
-### Clipboard Operations
+Кроме того, множество свойств консоли теперь доступны напрямую через `BConsole`:
 
-Статический класс `BConsole.Clipboard` предоставляет простой API для работы с буфером обмена:
+- `CursorVisible`
+- `WindowWidth`, `WindowHeight`
+- `BufferWidth`, `BufferHeight`
+- `Title`
+- `TreatControlCAsInput`
+- `CursorSize`
+- `NumberLock`, `CapsLock` (только Windows)
+- `LargestWindowWidth`, `LargestWindowHeight`
+- `IsInputRedirected`, `IsOutputRedirected`, `IsErrorRedirected`
+- `InputEncoding`, `OutputEncoding`
+
+### Поддержка мыши (экспериментально)
+
+В терминалах, поддерживающих отслеживание мыши, можно включить или отключить получение событий мыши:
+
+```csharp
+BConsole.EnableMouse();  // Начать получать события мыши
+BConsole.DisableMouse(); // Остановить получение событий мыши
+```
+
+**Примечание:** Обработка событий мыши пока не реализована полностью – поддерживается только включение/отключение отчёта. В будущих версиях будет добавлено чтение и обработка событий.
+
+### Буфер обмена
+
+Статический класс `BeautifulConsole.Clipboard.Clipboard` предоставляет простой API для работы с буфером обмена:
 
 - `void SetText(string? text)`
-- `bool TrySetText(string? text)` — возвращает успех операции без выбрасывания исключения.
+- `bool TrySetText(string? text)` – возвращает успешность операции без выбрасывания исключений.
 - `string? GetText()`
 - `bool IsTextAvailable()`
 - `bool Clear()`
 
 **Особенности платформ:**
-- **Windows:** используется WinAPI (`user32.dll`).
-- **macOS:** используется `pbcopy`/`pbpaste` (утилиты установлены по умолчанию).
-- **Linux:** используется `wl-copy` (Wayland) или `xclip`/`xsel` (X11). Библиотека автоматически определяет доступные инструменты.
+- **Windows:** использует WinAPI (`user32.dll`).
+- **macOS:** использует `pbcopy`/`pbpaste` (обычно установлены по умолчанию).
+- **Linux:** использует `wl-copy` (Wayland) или `xclip`/`xsel` (X11). Библиотека автоматически определяет доступные инструменты.
 
-### Color Utilities
+### Утилиты для работы с цветом
 
-Класс `Color` предоставляет более 150 предопределённых цветов. Вы также можете создать собственный RGB-цвет:
+Класс `Color` содержит более 150 предопределённых цветов. Вы также можете создавать свои RGB-цвета:
 
 ```csharp
 Color custom = new Color(123, 45, 67);
-BConsole.WriteLine("Пользовательский цвет", custom);
+BConsole.WriteLine(new Message("Пользовательский цвет", custom));
 ```
 
-Среди предопределённых цветов:
+Предопределённые цвета включают:
 - Базовые: `Color.Red`, `Color.Green`, `Color.Blue`, `Color.White`, `Color.Black`
-- Web: `Color.AliceBlue`, `Color.AntiqueWhite`, `Color.Cornsilk` и др.
+- Web: `Color.AliceBlue`, `Color.AntiqueWhite`, `Color.Cornsilk` и т.д.
 - Пастельные: `Color.PastelRed`, `Color.PastelGreen`, `Color.PastelBlue`
 - Неоновые: `Color.NeonRed`, `Color.NeonGreen`, `Color.NeonBlue`
 - Металлические: `Color.GoldMetallic`, `Color.SilverMetallic`, `Color.Bronze`
@@ -198,40 +264,73 @@ BConsole.WriteLine("Пользовательский цвет", custom);
 
 Краткий обзор публичного API:
 
-### `BConsole` (static class)
+### `BConsole` (статический класс)
 
-**Output**
-- `Write(string? line)`, `Write(string? line, Color fg)`, `Write(string? line, Color fg, Color bg)`
-- `WriteLine()`, `WriteLine(string? line)`, `WriteLine(string? line, Color fg)`, `WriteLine(string? line, Color fg, Color bg)`
+**Вывод**
+- `Write(Message? message)`
+- `WriteLine()`
+- `WriteLine(Message? message)`
+- `WriteGradient(string text, Color startColor, Color endColor, bool resetAfter = true)`
 - `Clear()`
 - `ResetColor()`
 
-**Input**
-- `Read()`, `Read(string? message)`, `Read(string? message, Color fg)`, `Read(string? message, Color fg, Color bg)`
-- `ReadLine()`, `ReadLine(string? message)`, `ReadLine(string? message, Color fg)`, `ReadLine(string? message, Color fg, Color bg)`
-- `ReadKey(bool intercept)`, `ReadKey(bool intercept, string? message)`, `ReadKey(bool intercept, string? message, Color fg)`, `ReadKey(bool intercept, string? message, Color fg, Color bg)`
+**Ввод**
+- `Read(bool newLine = false)`
+- `Read(Message? message, bool newLine = false)`
+- `ReadLine(bool newLine = false)`
+- `ReadLine(Message? message, bool newLine = false)`
+- `ReadKey(bool intercept = false, bool newLine = false)`
+- `ReadKey(bool intercept, Message? message, bool newLine = false)`
 
-**Properties**
+**Свойства**
 - `bool AutoResetColor { get; set; }`
 - `Color DefaultForegroundColor { get; set; }`
 - `Color DefaultBackgroundColor { get; set; }`
+- `bool CursorVisible { get; set; }`
+- `int WindowWidth { get; set; }` (только Windows для setter)
+- `int WindowHeight { get; set; }` (только Windows для setter)
+- `int BufferWidth { get; set; }` (только Windows для setter)
+- `int BufferHeight { get; set; }` (только Windows для setter)
+- `string Title { get; set; }`
+- `bool TreatControlCAsInput { get; set; }`
+- `int CursorSize { get; set; }`
+- `bool NumberLock { get; }` (только Windows)
+- `bool CapsLock { get; }` (только Windows)
+- `int LargestWindowWidth { get; }`
+- `int LargestWindowHeight { get; }`
+- `bool IsInputRedirected { get; }`
+- `bool IsOutputRedirected { get; }`
+- `bool IsErrorRedirected { get; }`
+- `Encoding InputEncoding { get; set; }`
+- `Encoding OutputEncoding { get; set; }`
 
-**Setup & Single Instance**
+**Настройка и единственный экземпляр**
 - `void SetupConsoleSettings(BOptions? options)`
 - `bool SetMutex(string? mutexName)`
 - `void ReleaseMutex()`
 
-### `BOptions` (class)
+**Мышь**
+- `void EnableMouse()`
+- `void DisableMouse()`
 
-Все свойства могут быть `null` или имеют разумные значения по умолчанию. Полный список см. в разделе [Console Window Configuration](#console-window-configuration).
+### `BOptions` (класс)
 
-### `Color` (class)
+Все свойства имеют значения по умолчанию. См. раздел [Настройка окна консоли](#detailed-usage).
 
-- Конструкторы: `Color(int r, int g, int b)`
+### `Color` (класс)
+
+- Конструкторы: `Color(int r, int g, int b)`, `Color()` (пустой цвет)
 - Более 150 статических предопределённых цветов.
 - Свойства: `R`, `G`, `B` (байты).
+- Методы: `Blend`, `Gradient`, `ToHsl`, `FromHsl`, `ToHsv`, `FromHsv`, `ToXterm256Index`.
 
-### `Clipboard` (static class, accessible via `BConsole.Clipboard`)
+### `Message` (класс)
+
+- `Message(string? text, Color? foreground = null, Color? background = null)`
+- `Message(char text, Color? foreground = null, Color? background = null)`
+- Свойства: `Text`, `ForegroundColor`, `BackgroundColor`.
+
+### `Clipboard` (статический класс, доступен через `BeautifulConsole.Clipboard.Clipboard`)
 
 - `void SetText(string? text)`
 - `bool TrySetText(string? text)`
@@ -243,4 +342,4 @@ BConsole.WriteLine("Пользовательский цвет", custom);
 
 ## Philosophy
 
-**Чёрный ящик (Black Box)** – вся внутренняя логика скрыта за простым статическим API `BConsole`. Вы работаете с чистыми методами и свойствами, не задумываясь об ANSI-последовательностях, различиях платформ или управлении внутренним состоянием. BeautifulConsole управляет всем за вас.
+**Чёрный ящик** – вся внутренняя логика скрыта за простым статическим API `BConsole`. Вы взаимодействуете с чистыми методами и свойствами, не задумываясь об ANSI-последовательностях, различиях платформ или внутреннем состоянии. BeautifulConsole управляет всем за вас.

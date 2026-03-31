@@ -13,7 +13,7 @@ internal static class TerminalCapabilities
     private static bool? _SupportsITerm2;
     private static bool? _IsWindowsVtSupported;
 
-    public static bool SupportsAnsi
+    internal static bool SupportsAnsi
     {
         get
         {
@@ -29,7 +29,7 @@ internal static class TerminalCapabilities
         }
     }
 
-    public static bool SupportsTrueColor
+    internal static bool SupportsTrueColor
     {
         get
         {
@@ -42,13 +42,13 @@ internal static class TerminalCapabilities
                             term?.Contains("truecolor") == true ||
                             term?.Contains("24bit") == true ||
                             (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
-                             !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WT_SESSION")));
+                            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WT_SESSION")));
             _SupportsTrueColor = supports;
             return supports;
         }
     }
 
-    public static bool Supports256Colors
+    internal static bool Supports256Colors
     {
         get
         {
@@ -61,22 +61,46 @@ internal static class TerminalCapabilities
         }
     }
 
-    public static bool SupportsMouse
+    internal static bool SupportsMouse
     {
         get
         {
             if (!SupportsAnsi) return false;
             if (_SupportsMouse.HasValue) return _SupportsMouse.Value;
-            _SupportsMouse = Supports256Colors || Environment.GetEnvironmentVariable("TERM_PROGRAM") == "vscode";
-            return _SupportsMouse.Value;
+            bool supported = false;
+            string? termProgram = Environment.GetEnvironmentVariable("TERM_PROGRAM");
+            string? term = Environment.GetEnvironmentVariable("TERM");
+            string? wtSession = Environment.GetEnvironmentVariable("WT_SESSION");
+            string? vteVersion = Environment.GetEnvironmentVariable("VTE_VERSION");
+            string? alacritty = Environment.GetEnvironmentVariable("ALACRITTY_LOG");
+            string? konsole = Environment.GetEnvironmentVariable("KONSOLE_VERSION");
+            string? gnomeTerminal = Environment.GetEnvironmentVariable("GNOME_TERMINAL_SCREEN");
+            string? termVersion = Environment.GetEnvironmentVariable("TERM_VERSION");
+            if (!string.IsNullOrEmpty(wtSession) ||
+                    termProgram == "vscode" ||
+                    SupportsKitty ||
+                    SupportsITerm2 ||
+                    !string.IsNullOrEmpty(alacritty) ||
+                    !string.IsNullOrEmpty(konsole) ||
+                    !string.IsNullOrEmpty(gnomeTerminal) ||
+                    termProgram == "Hyper" ||
+                    termProgram == "Tabby" ||
+                    termProgram == "WezTerm" ||
+                    term?.Contains("xterm") == true && termVersion?.Contains("mouse") == true ||
+                    vteVersion != null && int.TryParse(vteVersion, out int vte) && vte >= 500)
+                supported = true;
+            if (!supported && Supports256Colors)
+                supported = true;
+            _SupportsMouse = supported;
+            return supported;
         }
     }
 
-    public static bool SupportsKitty => _SupportsKitty ??= Environment.GetEnvironmentVariable("KITTY_WINDOW_ID") != null;
+    internal static bool SupportsKitty => _SupportsKitty ??= Environment.GetEnvironmentVariable("KITTY_WINDOW_ID") != null;
 
-    public static bool SupportsITerm2 => _SupportsITerm2 ??= Environment.GetEnvironmentVariable("ITERM_SESSION_ID") != null;
+    internal static bool SupportsITerm2 => _SupportsITerm2 ??= Environment.GetEnvironmentVariable("ITERM_SESSION_ID") != null;
 
-    private static bool IsWindowsVtSupported
+    internal static bool IsWindowsVtSupported
     {
         get
         {
@@ -89,14 +113,14 @@ internal static class TerminalCapabilities
                 if (handle == IntPtr.Zero) return false;
                 if (!NativeMethods.GetConsoleMode(handle, out uint mode)) return false;
                 const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
-                if ((mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0) _isWindowsVtSupported = true;
+                if ((mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0) _IsWindowsVtSupported = true;
                 else
                 {
                     uint newMode = mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-                    _isWindowsVtSupported = NativeMethods.SetConsoleMode(handle, newMode);
+                    _IsWindowsVtSupported = NativeMethods.SetConsoleMode(handle, newMode);
                 }
             }
-            catch { _isWindowsVtSupported = false; }
+            catch { _IsWindowsVtSupported = false; }
 #else
             _IsWindowsVtSupported = false;
 #endif

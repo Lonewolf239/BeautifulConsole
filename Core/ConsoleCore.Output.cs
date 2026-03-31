@@ -5,27 +5,31 @@ namespace BeautifulConsole.Core;
 
 internal static partial class ConsoleCore
 {
-    public static void Clear()
+    internal static void Clear()
     {
-        Console.Clear();
-        if (TerminalCapabilities.SupportsAnsi) Console.Write("\x1b[3J");
+        lock (ConsoleLock)
+        {
+            Console.Clear();
+            if (TerminalCapabilities.SupportsAnsi) Console.Write("\x1b[3J");
+        }
     }
 
-    public static void Write(Message? message, bool resetColor)
+    private static void WriteCore(Message? message, bool resetColor)
     {
         if (message is null) return;
         if (string.IsNullOrEmpty(message.Text)) return;
-        string text = message.Text;
-        bool colorChanged = !message.ForegroundColor.Empty || !message.BackgroundColor.Empty;
-        text = SetForegroundColor(text, message.ForegroundColor);
-        text = SetBackgroundColor(text, message.BackgroundColor);
-        Console.Write(text.ToString());
-        if (colorChanged && resetColor) ResetColor();
+        var (colorChanged, text) = GetTextWithColor(message);
+        Console.Write(text);
+        if (colorChanged && resetColor) ResetColorCore();
     }
 
-    public static void WriteLine() => Console.WriteLine();
+    internal static void Write(Message? message, bool resetColor) { lock (ConsoleLock) WriteCore(message, resetColor); }
 
-    public static void WriteLine(Message? message, bool resetColor)
+    internal static void Write(string? message, bool resetColor) => Write(new Message(message), resetColor);
+
+    internal static void WriteLine() { lock (ConsoleLock) Console.WriteLine(); }
+
+    private static void WriteLineCore(Message? message, bool resetColor)
     {
         if (message is null) return;
         if (string.IsNullOrEmpty(message.Text))
@@ -33,11 +37,12 @@ internal static partial class ConsoleCore
             Console.WriteLine();
             return;
         }
-        string text = message.Text;
-        bool colorChanged = !message.ForegroundColor.Empty || !message.BackgroundColor.Empty;
-        text = SetForegroundColor(text, message.ForegroundColor);
-        text = SetBackgroundColor(text, message.BackgroundColor);
-        Console.WriteLine(text.ToString());
-        if (colorChanged && resetColor) ResetColor();
+        var (colorChanged, text) = GetTextWithColor(message);
+        Console.WriteLine(text);
+        if (colorChanged && resetColor) ResetColorCore();
     }
+
+    internal static void WriteLine(Message? message, bool resetColor) { lock (ConsoleLock) WriteLineCore(message, resetColor); }
+
+    internal static void WriteLine(string? message, bool resetColor) => WriteLine(new Message(message), resetColor);
 }
