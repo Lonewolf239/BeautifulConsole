@@ -62,11 +62,11 @@ class Program
         BConsole.WriteLine(new Message($"\n  You pressed: {key.Key}", Color.PastelOrange));
 
         BConsole.WriteLine(new Message("6. Console properties:", Color.Yellow));
-        BConsole.WriteLine(new Message($"  Window size: {BConsole.WindowWidth} x {BConsole.WindowHeight}"));
-        BConsole.WriteLine(new Message($"  Buffer size: {BConsole.BufferWidth} x {BConsole.BufferHeight}"));
-        BConsole.WriteLine(new Message($"  Largest possible window: {BConsole.LargestWindowWidth} x {BConsole.LargestWindowHeight}"));
-        BConsole.WriteLine(new Message($"  Input redirected: {BConsole.IsInputRedirected}"));
-        BConsole.WriteLine(new Message($"  Output redirected: {BConsole.IsOutputRedirected}"));
+        BConsole.WriteLine($"  Window size: {BConsole.WindowWidth} x {BConsole.WindowHeight}");
+        BConsole.WriteLine($"  Buffer size: {BConsole.BufferWidth} x {BConsole.BufferHeight}");
+        BConsole.WriteLine($"  Largest possible window: {BConsole.LargestWindowWidth} x {BConsole.LargestWindowHeight}");
+        BConsole.WriteLine($"  Input redirected: {BConsole.IsInputRedirected}");
+        BConsole.WriteLine($"  Output redirected: {BConsole.IsOutputRedirected}");
 
         BConsole.WriteLine(new Message("7. AutoResetColor = false:", Color.Yellow));
         bool oldAuto = BConsole.AutoResetColor;
@@ -82,7 +82,7 @@ class Program
         string? phrase = BConsole.ReadLine(new Message("  Enter something for gradient: ", Color.PastelPurple));
         if (!string.IsNullOrEmpty(phrase))
         {
-            BConsole.Write(new("  "));
+            BConsole.Write("  ");
             BConsole.WriteGradient(phrase, Color.Red, Color.Magenta);
             BConsole.WriteLine();
         }
