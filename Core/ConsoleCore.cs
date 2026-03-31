@@ -5,8 +5,6 @@ namespace BeautifulConsole.Core;
 
 internal static partial class ConsoleCore
 {
-    private static bool? _SupportsTrueColor;
-    private static bool? _SupportsClearScreen;
     private static readonly (ConsoleColor Color, byte R, byte G, byte B)[] ConsoleColors = new (ConsoleColor Color, byte R, byte G, byte B)[]
     {
         (ConsoleColor.Black, 0, 0, 0),
@@ -26,32 +24,6 @@ internal static partial class ConsoleCore
         (ConsoleColor.Yellow, 255, 255, 0),
         (ConsoleColor.White, 255, 255, 255)
     };
-
-    private static bool SupportsTrueColor()
-    {
-        if (_SupportsTrueColor.HasValue) return _SupportsTrueColor.Value;
-        var term = Environment.GetEnvironmentVariable("TERM");
-        var colorTerm = Environment.GetEnvironmentVariable("COLORTERM");
-        bool supports = colorTerm == "truecolor" ||
-                       colorTerm == "24bit" ||
-                       term?.Contains("truecolor") == true ||
-                       term?.Contains("24bit") == true ||
-                       Environment.OSVersion.Platform == PlatformID.Win32NT &&
-                       !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WT_SESSION"));
-        _SupportsTrueColor = supports;
-        return supports;
-    }
-
-    private static bool SupportsExtendedClear()
-    {
-        if (_SupportsClearScreen.HasValue) return _SupportsClearScreen.Value;
-        bool supports = SupportsTrueColor() ||
-                       Environment.OSVersion.Platform == PlatformID.Unix ||
-                       Environment.OSVersion.Platform == PlatformID.MacOSX ||
-                       (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WT_SESSION")));
-        _SupportsClearScreen = supports;
-        return supports;
-    }
 
     private static ConsoleColor GetNearestConsoleColor(Color color)
     {
@@ -76,29 +48,45 @@ internal static partial class ConsoleCore
         return nearestColor;
     }
 
-    public static void SetForegroundColor(Color color)
+    public static string SetForegroundColor(string text, Color color)
     {
-        if (SupportsTrueColor()) Console.Write($"\x1b[38;2;{color.R};{color.G};{color.B}m");
+        if (color.Empty) return text;
+        if (TerminalCapabilities.SupportsTrueColor)
+            return $"\x1b[38;2;{color.R};{color.G};{color.B}m{text}";
+        if (TerminalCapabilities.Supports256Colors)
+        {
+            int index = color.ToXterm256Index();
+            return $"\x1b[38;5;{index}m{text}";
+        }
         else
         {
             var consoleColor = GetNearestConsoleColor(color);
             Console.ForegroundColor = consoleColor;
+            return text;
         }
     }
 
-    public static void SetBackgroundColor(Color color)
+    public static string SetBackgroundColor(string text, Color color)
     {
-        if (SupportsTrueColor()) Console.Write($"\x1b[48;2;{color.R};{color.G};{color.B}m");
+        if (color.Empty) return text;
+        if (TerminalCapabilities.SupportsTrueColor)
+            return $"\x1b[48;2;{color.R};{color.G};{color.B}m{text}";
+        if (TerminalCapabilities.Supports256Colors)
+        {
+            int index = color.ToXterm256Index();
+            return $"\x1b[48;5;{index}m{text}";
+        }
         else
         {
             var consoleColor = GetNearestConsoleColor(color);
             Console.BackgroundColor = consoleColor;
+            return text;
         }
     }
 
     public static void ResetColor()
     {
-        if (SupportsTrueColor()) Console.Write("\x1b[0m");
+        if (TerminalCapabilities.SupportsAnsi) Console.Write("\x1b[0m");
         else Console.ResetColor();
     }
 }

@@ -8,30 +8,36 @@ internal static partial class ConsoleCore
     public static void Clear()
     {
         Console.Clear();
-        if (SupportsExtendedClear()) Console.Write("\x1b[3J");
+        if (TerminalCapabilities.SupportsAnsi) Console.Write("\x1b[3J");
     }
 
-    public static void Write(string? line, Color foregroundColor, Color backgroundColor, bool resetColor)
+    public static void Write(Message? message, bool resetColor)
     {
-        if (string.IsNullOrEmpty(line)) return;
-        SetForegroundColor(foregroundColor);
-        SetBackgroundColor(backgroundColor);
-        Console.Write(line);
-        if (resetColor) ResetColor();
+        if (message is null) return;
+        if (string.IsNullOrEmpty(message.Text)) return;
+        string text = message.Text;
+        bool colorChanged = !message.ForegroundColor.Empty || !message.BackgroundColor.Empty;
+        text = SetForegroundColor(text, message.ForegroundColor);
+        text = SetBackgroundColor(text, message.BackgroundColor);
+        Console.Write(text.ToString());
+        if (colorChanged && resetColor) ResetColor();
     }
 
     public static void WriteLine() => Console.WriteLine();
 
-    public static void WriteLine(string? line, Color foregroundColor, Color backgroundColor, bool resetColor)
+    public static void WriteLine(Message? message, bool resetColor)
     {
-        if (string.IsNullOrEmpty(line))
+        if (message is null) return;
+        if (string.IsNullOrEmpty(message.Text))
         {
             Console.WriteLine();
             return;
         }
-        SetForegroundColor(foregroundColor);
-        SetBackgroundColor(backgroundColor);
-        Console.WriteLine(line);
-        if (resetColor) ResetColor();
+        string text = message.Text;
+        bool colorChanged = !message.ForegroundColor.Empty || !message.BackgroundColor.Empty;
+        text = SetForegroundColor(text, message.ForegroundColor);
+        text = SetBackgroundColor(text, message.BackgroundColor);
+        Console.WriteLine(text.ToString());
+        if (colorChanged && resetColor) ResetColor();
     }
 }

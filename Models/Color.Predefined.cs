@@ -2,6 +2,9 @@ namespace BeautifulConsole.Models;
 
 public partial class Color
 {
+    /// <summary>Gets a color with no value set.</summary>
+    public static Color NoColor => new();
+
     /// <summary>Gets the pure white color (255, 255, 255).</summary>
     public static Color White => new(255, 255, 255);
     /// <summary>Gets the pure black color (0, 0, 0).</summary>

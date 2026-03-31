@@ -27,13 +27,13 @@ public static partial class BConsole
     /// Gets or sets the default foreground color used for console output when colors are reset.
     /// The default value is <see cref="Color.White"/>.
     /// </summary>
-    public static Color DefaultForegroundColor { get; set; } = Color.White;
+    public static Color DefaultForegroundColor { get; set; } = Color.NoColor;
 
     /// <summary>
     /// Gets or sets the default background color used for console output when colors are reset.
     /// The default value is <see cref="Color.Black"/>.
     /// </summary>
-    public static Color DefaultBackgroundColor { get; set; } = Color.Black;
+    public static Color DefaultBackgroundColor { get; set; } = Color.NoColor;
 
     /// <summary>
     /// Gets or sets the width of the console window measured in columns.

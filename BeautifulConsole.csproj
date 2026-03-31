@@ -23,6 +23,12 @@
 		<DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
+		<Compile Remove="BeautifulConsoleDemo\**" />
+		<Content Remove="BeautifulConsoleDemo\**" />
+		<None Remove="BeautifulConsoleDemo\**" />
+		<EmbeddedResource Remove="BeautifulConsoleDemo\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Include="icon.png" Pack="true" PackagePath="\" />
 		<None Include="docs\README-NUGET.md" Pack="true" PackagePath="\" />
 		<None Include="LICENSE" Pack="true" PackagePath="\" />
